@@ -1,0 +1,19 @@
+{
+  "name": "kplc-send-bill-enquiry-email",
+  "version": "1.0.0",
+  "description": "Send KPLC bill enquiry email",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okal/kplc-bill-bot.git"
+  },
+  "author": "Okal Otieno <okal@justokal.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/okal/kplc-bill-bot/issues"
+  },
+  "homepage": "https://github.com/okal/kplc-bill-bot#readme"
+}
