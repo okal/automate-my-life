@@ -27,18 +27,14 @@ exports.handler = function(event, context, callback) {
 			} else {
 				let email = data.Body.toString();
 				
-				console.log("Email contents START");
-				console.log(email);
-				console.log("Email contents END");
-
 				let accountNumber = email.match(/ACCOUNT NO: (.*)/)[1];
-				console.log(`ACCOUNT NUMBER ${accountNumber}`)
+				console.log(`ACCOUNT NUMBER: ${accountNumber}`)
 
 				let amount = email.match(/AMOUNT BALANCE: (.*)/)[1];
 				console.log(`AMOUNT: KES ${amount}`)
 
 				let lastAmountPaid =  email.match(/LAST AMOUNT PAID: (.*)/)[1];
-				console.log(`LAST AMOUNT PAID ${lastAmountPaid}`);
+				console.log(`LAST AMOUNT PAID: KES ${lastAmountPaid}`);
 
 				let dueDate = email.match(/DUE DATE: (.*) 00:00:00/)[1];
 				console.log(`DUE DATE: ${dueDate}`);
