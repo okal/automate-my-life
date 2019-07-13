@@ -14,7 +14,7 @@ exports.handler = async(event) => {
 		SES: ses,
 	});
 
-	transporter.sendEmail(mailOptions, (err, info) => {
+	transporter.sendMail(mailOptions, (err, info) => {
 		console.log(info.envelope);
 
 		if(err) {
