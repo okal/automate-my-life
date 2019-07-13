@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/okal/kplc-bill-bot/issues"
   },
-  "homepage": "https://github.com/okal/kplc-bill-bot#readme"
+  "homepage": "https://github.com/okal/kplc-bill-bot#readme",
+  "dependencies": {
+    "nodemailer": "^6.2.1"
+  }
 }
