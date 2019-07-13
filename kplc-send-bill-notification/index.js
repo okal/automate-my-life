@@ -6,12 +6,8 @@ exports.handler = function(event, context, callback) {
 	let messageId = mailInfo.messageId;
 	console.log(`Processing invoice for email ID ${messageId}`);
 
-	let headers = mailInfo.headers.reduce((headers, header) => {
-		headers[header.name] = header.value;
-	}, {});
-
-	let contentTypeBoundary = headers["Content-Type"]
-		.match(/^multipart\/alternative; boundary="(.*)"$/)[0];
+	let contentType = mailInfo.headers.filter((header) => header.name === "Content-Type")[0];
+	let contentTypeBoundary = contentType.match(/^multipart\/alternative; boundary="(.*)"$/)[0];
 
 	console.log(`Content Type boundary ${contentTypeBoundary}`)
 }
