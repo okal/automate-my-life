@@ -1,2 +1,3 @@
-# kplc-bill-bot
-AWS Lambda Utilities To Fetch, Parse, and Forward KPLC Postpaid Power Bills
+# Automate My Life
+
+AWS Lambda utilities to automate irritating aspects of my life. Mostly checking utility bills and sending me push notifications for now.
