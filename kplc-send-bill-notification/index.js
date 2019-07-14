@@ -1,5 +1,8 @@
 const aws = require("aws-sdk");
+const https = require("https");
+const querystring = require("querystring");
 const s3 = new aws.S3();
+
 
 exports.handler = function(event, context, callback) {
 	let mailInfo = event.Records[0].ses.mail;
@@ -38,7 +41,39 @@ exports.handler = function(event, context, callback) {
 
 				let dueDate = email.match(/DUE DATE: (.*) 00:00:00/)[1];
 				console.log(`DUE DATE: ${dueDate}`);
+				
+				
+				let pushedPayload = querystring.stringify({
+					app_key: process.env.PUSHED_APP_KEY,
+					app_secret: process.env.PUSHED_APP_SECRET,
+					content: `Your electricity bill is KES ${amount} and is due on ${dueDate}.\nTo pay by MPESA:\n\nBusiness Number: ${process.env.KPLC_MPESA_PAYBILL_NUMBER}\nAccount number: ${accountNumber}\nAmount: ${amount}.`,
+					target_type: "channel",
+					target_alias: process.env.PUSHED_CHANNEL_ALIAS,
+				})
+				
+				let pushConfig = {
+					host: process.env.PUSHED_API_HOST,
+					path: process.env.PUSHED_API_ENDPOINT_URI,
+					method: "POST",
+					headers: {
+        				'Content-Type': 'application/x-www-form-urlencoded',
+        				'Content-Length': pushedPayload.length
+					}
+				}
+				
+				let req = https.request(pushConfig, function (res) {
+    				let responseString = "";
 
+    				res.on("data", function (data) {
+        				responseString += data;
+    				});
+    				res.on("end", function () {
+        				console.log(responseString);
+    				});
+				});
+				
+				
+				req.write(pushedPayload);
 			}
 		}
 	);
